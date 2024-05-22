@@ -65,3 +65,26 @@ test('Maybe with complex objects', () => {
     expect(result.value.b).toBe('test');
   }
 });
+
+test('map on Some transforms the value and type', () => {
+  const result = some(2).map((x) => x.toString());
+  expect(result.isSome()).toBe(true);
+  if (result.isSome()) {
+    expect(result.value).toBe('2');
+  }
+});
+
+test('map on None returns None', () => {
+  const result = none().map((x: number) => x.toString());
+  expect(result.isNone()).toBe(true);
+});
+
+test('unwrap_or on Some returns the value', () => {
+  const result = some(5).unwrap_or(10);
+  expect(result).toBe(5);
+});
+
+test('unwrap_or on None returns the default value', () => {
+  const result = none().unwrap_or(10);
+  expect(result).toBe(10);
+});
