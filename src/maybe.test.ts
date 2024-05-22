@@ -19,25 +19,16 @@ test('none creates a None instance', () => {
   expect(result.isNone()).toBe(true);
 });
 
-test('Some isSome method', () => {
-  const result = some('test');
+test('Some type checks correctly', () => {
+  const result: Maybe<number> = some(100);
   expect(result.isSome()).toBe(true);
-  expect(result.isNone()).toBe(false);
+  if (result.isSome()) {
+    expect(result.value).toBe(100);
+  }
 });
 
-test('Some isNone method', () => {
-  const result = some('test');
-  expect(result.isNone()).toBe(false);
-});
-
-test('None isSome method', () => {
-  const result = none();
-  expect(result.isSome()).toBe(false);
-  expect(result.isNone()).toBe(true);
-});
-
-test('None isNone method', () => {
-  const result = none();
+test('None type checks correctly', () => {
+  const result: Maybe<string> = none();
   expect(result.isNone()).toBe(true);
   expect(result.isSome()).toBe(false);
 });
@@ -60,20 +51,6 @@ test('Maybe can hold different types', () => {
   expect(booleanResult.isSome()).toBe(true);
   if (booleanResult.isSome()) {
     expect(booleanResult.value).toBe(true);
-  }
-});
-
-test('None type checks correctly', () => {
-  const result: Maybe<string> = none();
-  expect(result.isNone()).toBe(true);
-  expect(result.isSome()).toBe(false);
-});
-
-test('Some type checks correctly', () => {
-  const result: Maybe<number> = some(100);
-  expect(result.isSome()).toBe(true);
-  if (result.isSome()) {
-    expect(result.value).toBe(100);
   }
 });
 
